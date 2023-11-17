@@ -29,3 +29,4 @@ pipeline {
                 sh 'mvn verify -DskipUnitTests'
             }
         }
+    }
