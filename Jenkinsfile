@@ -4,6 +4,9 @@ pipeline {
     pollSCM('* * * * *') // Enabling being build on Push
 	}
 	agent any
+	environment {
+		IMAGE_NAME = 'pratyusha2001/mvpjava'
+	}
     stages{
         
         stage('BUILD'){
@@ -34,7 +37,7 @@ pipeline {
                 script {
     
                     // Assuming your Dockerfile is in the root directory of your project
-                    def dockerImage = docker.build("username/test:${env.BUILD_ID}")
+                    def dockerImage = docker.build("${env.IMAGE_NAME}:${env.BUILD_ID}")
 
                     
                     docker.withRegistry('https://registry.hub.docker.com', 'dockercred') {
