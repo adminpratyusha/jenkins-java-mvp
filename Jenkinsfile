@@ -29,5 +29,20 @@ pipeline {
                 sh 'mvn verify -DskipUnitTests'
             }
         }
+	    stage('DOCKER BUILD & PUSH') {
+            steps {
+                script {
+			withCredentials([string(credentialsId: 'dockerusername', variable: 'username'), string(credentialsId: 'dockerpassword', variable: 'password')]) {
+    // some block}
+                    // Assuming your Dockerfile is in the root directory of your project
+                    def dockerImage = docker.build("username/test:${env.BUILD_ID}")
+
+                    // Login to Docker Hub
+                    docker.withRegistry('https://registry.hub.docker.com', 'username', 'password') {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
     }
 }
