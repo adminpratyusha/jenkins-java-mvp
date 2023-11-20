@@ -1,11 +1,14 @@
-# Use an official OpenJDK runtime as a parent image
-FROM openjdk:11-jre-slim
+# Use an official Tomcat runtime as a parent image
+FROM tomcat:9-jre11-slim
 
 # Set the working directory in the container
-WORKDIR /usr/src/app
+WORKDIR /usr/local/tomcat/webapps
 
-# Copy the application JAR file into the container at the specified working directory
+# Copy the WAR file into the container at the specified working directory
 COPY ./target/vprofile-v2.war .
 
+# Expose the default Tomcat port
+EXPOSE 3001
+
 # Specify the command to run on container start
-CMD ["java", "-jar", "your-java-application.jar"]
+CMD ["catalina.sh", "run"]
