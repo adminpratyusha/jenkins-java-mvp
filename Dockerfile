@@ -5,7 +5,7 @@ FROM openjdk:11-jre-slim
 WORKDIR /usr/src/app
 
 # Copy the application JAR file into the container at the specified working directory
-COPY ./target/your-java-application.jar .
+COPY ./target/vprofile-v2.war .
 
 # Specify the command to run on container start
 CMD ["java", "-jar", "your-java-application.jar"]
