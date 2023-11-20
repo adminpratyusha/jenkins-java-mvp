@@ -32,7 +32,7 @@ pipeline {
 	    stage('DOCKER BUILD & PUSH') {
             steps {
                 script {
-    // some block}
+    
                     // Assuming your Dockerfile is in the root directory of your project
                     def dockerImage = docker.build("username/test:${env.BUILD_ID}")
 
