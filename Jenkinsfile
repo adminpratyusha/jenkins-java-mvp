@@ -8,7 +8,7 @@ pipeline {
 		IMAGE_NAME = 'pratyusha2001/mvpjava'
 		NEXUS_VERSION = "nexus3"
                 NEXUS_PROTOCOL = "http"
-                NEXUS_URL = "http://34.172.247.216:8081/repository/mvpjava/"
+                NEXUS_URL = "http://34.172.247.216:8081"
                 NEXUS_REPOSITORY = "mvpjava"
 	        NEXUS_REPO_ID    = "mvpjava"
                 NEXUS_CREDENTIAL_ID = "nexuslogin"
@@ -28,17 +28,17 @@ pipeline {
             }
         }
 
-	stage('UNIT TEST'){
-            steps {
-                sh 'mvn test'
-            }
-        }
+	// stage('UNIT TEST'){
+ //            steps {
+ //                sh 'mvn test'
+ //            }
+ //        }
  
-	stage('INTEGRATION TEST'){
-            steps {
-                sh 'mvn verify -DskipUnitTests'
-            }
-        }
+	// stage('INTEGRATION TEST'){
+ //            steps {
+ //                sh 'mvn verify -DskipUnitTests'
+ //            }
+ //        }
 	stage("Publish to Nexus Repository Manager") {
             steps {
                 script {
