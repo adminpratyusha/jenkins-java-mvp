@@ -5,7 +5,7 @@ FROM tomcat:9-jre11-slim
 WORKDIR /usr/local/tomcat/webapps
 
 # Copy the WAR file into the container at the specified working directory
-COPY ./*.war .
+COPY ./target/*.war .
 
 # Expose the default Tomcat port
 EXPOSE 3001
