@@ -27,9 +27,9 @@ agent any
                 }
             }
         }
-stage('OWASP Dependency-Check Vulnerabilities') {
-      steps {
-        dependencyCheck additionalArguments: ''' 
+       stage('OWASP Dependency-Check Vulnerabilities') {
+           steps {
+               dependencyCheck additionalArguments: ''' 
                     -o './'
                     -s './'
                     -f 'ALL' 
@@ -43,12 +43,12 @@ stage('OWASP Dependency-Check Vulnerabilities') {
             }
         }
  
-	stage('INTEGRATION TEST'){
+	  stage('INTEGRATION TEST'){
             steps {
                 sh 'mvn verify -DskipUnitTests'
             }
         }
-	stage("Publish to Nexus Repository Manager") {      
+	  stage("Publish to Nexus Repository Manager") {      
                script {
                     pom = readMavenPom file: "pom.xml";
                     filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
