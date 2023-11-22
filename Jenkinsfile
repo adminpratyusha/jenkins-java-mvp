@@ -50,7 +50,8 @@ agent any
                 sh 'mvn verify -DskipUnitTests'
             }
         }
-	    stage("Publish to Nexus Repository Manager") {      
+	    stage("Publish to Nexus Repository Manager") { 
+	     steps {
                script {
 		       withCredentials([string(credentialsId: 'nexusurl', variable: 'NEXUS_URL')]) {
 
@@ -85,6 +86,7 @@ agent any
                         error "*** File: ${artifactPath}, could not be found";
                     }
                 }
+	       }
             }
         }
 	    stage('DOCKER BUILD & PUSH') {
