@@ -8,7 +8,7 @@ pipeline {
 		IMAGE_NAME = 'pratyusha2001/mvpjava'
 		NEXUS_VERSION = "nexus3"
                 NEXUS_PROTOCOL = "http"
-                NEXUS_URL = "34.172.247.216:8081"
+                NEXUS_URL = "35.232.107.144:8081"
                 NEXUS_REPOSITORY = "mvpjava"
 	        NEXUS_REPO_ID    = "mvpjava"
                 NEXUS_CREDENTIAL_ID = "nexuslogin"
