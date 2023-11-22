@@ -26,8 +26,7 @@ agent any
                     archiveArtifacts artifacts: '**/target/*.war'
                 }
             }
-        }
-       stage('OWASP Dependency-Check Vulnerabilities') {
+        }stage('OWASP Dependency-Check Vulnerabilities') {
            steps {
                dependencyCheck additionalArguments: ''' 
                     -o './'
