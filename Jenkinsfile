@@ -1,6 +1,8 @@
 
 pipeline {
-       
+       triggers {
+    pollSCM('* * * * *') // Enabling being build on Push
+  }
 	agent any
 	environment {
 		IMAGE_NAME = 'pratyusha2001/mvpjava'
@@ -13,13 +15,6 @@ pipeline {
                 ARTVERSION = "${env.BUILD_ID}"
 	}
     stages{
-                stage('Checkout') {
-            steps {
-                checkout scm
-            }
-			when {
-        expression { env.CHANGE_ID != null }
-    }
         stage('BUILD'){
             steps {
                 sh 'mvn clean install -DskipTests'
