@@ -15,6 +15,7 @@ agent any
                 NEXUS_CREDENTIAL_ID = "nexuslogin"
                 ARTVERSION = "${env.BUILD_ID}"
 	}
+	
     stages{
         stage('BUILD'){
             steps {
