@@ -9,7 +9,7 @@ agent any
 		IMAGE_NAME = 'pratyusha2001/mvpjava'
 		NEXUS_VERSION = "nexus3"
                 NEXUS_PROTOCOL = "http"
-                NEXUS_URL = "nexusurl"
+                // NEXUS_URL = "nexusurl"
                 NEXUS_REPOSITORY = "mvpjava"
 	        NEXUS_REPO_ID    = "mvpjava"
                 NEXUS_CREDENTIAL_ID = "nexuslogin"
@@ -49,16 +49,15 @@ stage('OWASP Dependency-Check Vulnerabilities') {
                 sh 'mvn verify -DskipUnitTests'
             }
         }
-	stage("Publish to Nexus Repository Manager") {
-            steps {
-		    withCredentials([string(credentialsId: 'nexusurl', variable: 'nexusurl')]) {
-}
-                script {
+	stage("Publish to Nexus Repository Manager") {      
+               script {
                     pom = readMavenPom file: "pom.xml";
                     filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
                     echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
                     artifactPath = filesByGlob[0].path;
                     artifactExists = fileExists artifactPath;
+		    		    withCredentials([string(credentialsId: 'nexusurl', variable: 'NEXUS_URL')]) {
+
                     if(artifactExists) {
                         echo "*** File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
                         nexusArtifactUploader(
