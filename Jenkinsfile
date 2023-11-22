@@ -17,8 +17,8 @@ pipeline {
             steps {
                 checkout scm
             }
-			 when {
-        changeset "*"
+			when {
+        expression { env.CHANGE_ID != null }
     }
         stage('BUILD'){
             steps {
