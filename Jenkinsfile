@@ -49,8 +49,13 @@ agent any
             steps {
                 sh 'mvn verify -DskipUnitTests'
             }
-        }
-	              steps {
+        }stage('CODE ANALYSIS with SONARQUBE') {
+          
+		  environment {
+             scannerHome = tool 'sonarscanner4'
+          }
+
+          steps {
             withSonarQubeEnv('sonar-pro') {
                sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=vprofile \
                    -Dsonar.projectName=vprofile-repo \
