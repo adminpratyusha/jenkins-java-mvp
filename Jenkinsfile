@@ -17,6 +17,9 @@ pipeline {
             steps {
                 checkout scm
             }
+			 when {
+        changeset "*"
+    }
         stage('BUILD'){
             steps {
                 sh 'mvn clean install -DskipTests'
