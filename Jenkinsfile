@@ -1,8 +1,6 @@
 
 pipeline {
-        triggers {
-        githubPush()
-	}
+       
 	agent any
 	environment {
 		IMAGE_NAME = 'pratyusha2001/mvpjava'
@@ -15,7 +13,10 @@ pipeline {
                 ARTVERSION = "${env.BUILD_ID}"
 	}
     stages{
-        
+                stage('Checkout') {
+            steps {
+                checkout scm
+            }
         stage('BUILD'){
             steps {
                 sh 'mvn clean install -DskipTests'
