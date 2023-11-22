@@ -26,7 +26,8 @@ agent any
                     archiveArtifacts artifacts: '**/target/*.war'
                 }
             }
-        }stage('OWASP Dependency-Check Vulnerabilities') {
+        }
+	    stage('OWASP Dependency-Check Vulnerabilities') {
            steps {
                dependencyCheck additionalArguments: ''' 
                     -o './'
@@ -36,7 +37,8 @@ agent any
         
         dependencyCheckPublisher pattern: 'dependency-check-report.xml'
       }
-    }stage('UNIT TEST'){
+    }
+	    stage('UNIT TEST'){
             steps {
                 sh 'mvn test'
             }
@@ -46,7 +48,8 @@ agent any
             steps {
                 sh 'mvn verify -DskipUnitTests'
             }
-        }stage("Publish to Nexus Repository Manager") {      
+        }
+	    stage("Publish to Nexus Repository Manager") {      
                script {
 		       withCredentials([string(credentialsId: 'nexusurl', variable: 'NEXUS_URL')]) {
 
