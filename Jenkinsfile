@@ -1,11 +1,10 @@
 pipeline {
     
 	agent any
-/*	
-	tools {
-        maven "maven3"
+ triggers {
+        githubPush()
     }
-*/	
+
     environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
