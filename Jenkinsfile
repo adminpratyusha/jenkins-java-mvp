@@ -28,14 +28,16 @@ agent any
             }
         }
 stage('OWASP Dependency-Check Vulnerabilities') {
-    steps {
-        script {
-            def odcHome = tool 'OWASP Dependency-Check Vulnerabilities'
-            sh "${odcHome}/bin/dependency-check.sh -o './' -s './' -f 'ALL' --prettyPrint"
-            // Additional steps...
-        }
+      steps {
+        dependencyCheck additionalArguments: ''' 
+                    -o './'
+                    -s './'
+                    -f 'ALL' 
+                    --prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
+        
+        dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+      }
     }
-}
 	// stage('UNIT TEST'){
  //            steps {
  //                sh 'mvn test'
