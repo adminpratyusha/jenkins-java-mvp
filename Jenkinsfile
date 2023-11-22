@@ -37,8 +37,7 @@ stage('OWASP Dependency-Check Vulnerabilities') {
         
         dependencyCheckPublisher pattern: 'dependency-check-report.xml'
       }
-    }
-	stage('UNIT TEST'){
+    }stage('UNIT TEST'){
             steps {
                 sh 'mvn test'
             }
