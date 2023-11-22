@@ -9,7 +9,7 @@ agent any
 		IMAGE_NAME = 'pratyusha2001/mvpjava'
 		NEXUS_VERSION = "nexus3"
                 NEXUS_PROTOCOL = "http"
-                NEXUS_URL = 'nexusurl'
+                NEXUS_URL = "nexusurl"
                 NEXUS_REPOSITORY = "mvpjava"
 	        NEXUS_REPO_ID    = "mvpjava"
                 NEXUS_CREDENTIAL_ID = "nexuslogin"
@@ -51,6 +51,8 @@ stage('OWASP Dependency-Check Vulnerabilities') {
         }
 	stage("Publish to Nexus Repository Manager") {
             steps {
+		    withCredentials([string(credentialsId: 'nexusurl', variable: 'nexusurl')]) {
+}
                 script {
                     pom = readMavenPom file: "pom.xml";
                     filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
