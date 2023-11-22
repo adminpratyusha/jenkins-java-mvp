@@ -1,7 +1,7 @@
 
 pipeline {
         triggers {
-    pollSCM('* * * * *') // Enabling being build on Push
+        githubPush()
 	}
 	agent any
 	environment {
