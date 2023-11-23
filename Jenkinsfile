@@ -3,7 +3,6 @@ pipeline {
        triggers {
     pollSCM('* * * * *') // Enabling being build on Push
   }
-	
 agent any
 	environment {
 		IMAGE_NAME = 'pratyusha2001/mvpjava'
