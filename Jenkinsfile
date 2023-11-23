@@ -104,7 +104,7 @@ agent any
 		    else {
                         error "*** File: ${artifactPath}, could not be found";
                     }
-                }
+                // }
 	       }
             }
         }
@@ -120,7 +120,7 @@ agent any
                         dockerImage.push()
                     }
                 }
-            // }
+            }
         }
         }
     }
