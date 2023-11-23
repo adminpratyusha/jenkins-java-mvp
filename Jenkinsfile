@@ -8,7 +8,7 @@ agent any
 		IMAGE_NAME = 'pratyusha2001/mvpjava'
 		NEXUS_VERSION = "nexus3"
                 NEXUS_PROTOCOL = "http"
-                NEXUS_URL = "34.42.7.89:8081"
+                // NEXUS_URL = "34.42.7.89:8081"
                 NEXUS_REPOSITORY = "mvpjava"
 	        NEXUS_REPO_ID    = "mvpjava"
                 NEXUS_CREDENTIAL_ID = "nexuslogin"
@@ -72,7 +72,7 @@ agent any
 	    stage("Publish to Nexus Repository Manager") { 
 	     steps {
                script {
-		       // withCredentials([string(credentialsId: 'nexusurl', variable: 'NEXUS_URL')]) {
+		       withCredentials([string(credentialsId: 'nexusurl', variable: 'NEXUS_URL')]) {
 
                     pom = readMavenPom file: "pom.xml";
                     filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
@@ -104,7 +104,7 @@ agent any
 		    else {
                         error "*** File: ${artifactPath}, could not be found";
                     }
-                // }
+                }
 	       }
             }
         }
