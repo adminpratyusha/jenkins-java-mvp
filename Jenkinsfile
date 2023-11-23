@@ -14,8 +14,7 @@ agent any
                 NEXUS_CREDENTIAL_ID = "nexuslogin"
                 ARTVERSION = "${env.BUILD_ID}"
 	}
-	
-    stages{
+	stages{
         stage('BUILD'){
             steps {
                 sh 'mvn clean install -DskipTests'
