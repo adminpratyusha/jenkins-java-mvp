@@ -17,7 +17,7 @@ agent any
 	stages{
         stage('BUILD'){
             steps {
-		                sh 'mvn clean install -DskipTests'
+		 sh 'mvn clean install -DskipTests'
 	    }
             post {
                 success {
