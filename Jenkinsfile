@@ -50,26 +50,19 @@ agent any
 		    }
 	    }
         }
-	    // stage('CODE ANALYSIS with SONARQUBE') {
-     //      		  environment {
-     //         scannerHome = tool 'sonar-scanner'
-     //      }
+	    stage('CODE ANALYSIS with SONARQUBE') {
+          		  environment {
+             scannerHome = tool 'sonar-scanner'
+          }
 
-     //      steps {
-     //        withSonarQubeEnv('sonarqube') {
-     //           sh '''${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=vprofile \
-     //               -Dsonar.projectName=java \
-     //               -Dsonar.projectVersion=1.0 \
-     //               -Dsonar.sources=src/ \
-     //               -Dsonar.java.binaries=target/test-classes/com/visualpathit/account/controllerTest/ \
-     //               -Dsonar.junit.reportsPath=target/surefire-reports/ \
-     //               -Dsonar.jacoco.reportsPath=target/jacoco.exec \
-     //               -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
-     //        }
-
-           
-     //      }
-     //    }
+          steps {
+		  script{
+            withSonarQubeEnv('sonarqube') {
+		    sonarqube.sonarscanner()
+	    }
+            }
+                 }
+        }
 	    // stage("Publish to Nexus Repository Manager") { 
 	    //  steps {
      //           script {
