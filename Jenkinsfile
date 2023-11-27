@@ -58,7 +58,7 @@ agent any
           steps {
 		  script{
             withSonarQubeEnv('sonarqube') {
-		    sonarqube.sonarscanner()
+		    sonarqube.sonarscanner('Java','java')
 	    }
             }
                  }
