@@ -39,17 +39,21 @@ agent any
    //      dependencyCheckPublisher pattern: 'dependency-check-report.xml'
    //    }
    //  }
-	  //   stage('UNIT TEST'){
-   //          steps {
-   //              sh 'mvn test'
-   //          }
-   //      }
+	    stage('UNIT TEST'){
+            steps {
+		    script {
+                sh 'mvn test'
+		    }
+            }
+        }
  
-	  // stage('INTEGRATION TEST'){
-   //          steps {
-   //              sh 'mvn verify -DskipUnitTests'
-   //          }
-   //      }
+	  stage('INTEGRATION TEST'){
+            steps {
+		    script{
+                sh 'mvn verify -DskipUnitTests'
+            }
+	    }
+        }
 	  //   stage('CODE ANALYSIS with SONARQUBE') {
           
 		 //  environment {
