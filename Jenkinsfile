@@ -67,7 +67,7 @@ agent any
 	     steps {
                script {
 		       withCredentials([string(credentialsId: 'nexusurl', variable: 'NEXUS_URL')]) {
-                       nexusrepo.nexus('NEXUS_URL')
+                       nexusrepo.nexus(NEXUS_URL)
 
                 }
 	       }
