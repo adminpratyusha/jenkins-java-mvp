@@ -1,7 +1,7 @@
 @Library('shared-library')
-pipeline {
+  pipeline {
        triggers {
-    pollSCM('* * * * *') // Enabling being build on Push
+    // pollSCM('* * * * *') // Enabling being build on Push
   }
 agent any
 	environment {
