@@ -50,7 +50,7 @@ agent any
 	  stage('INTEGRATION TEST'){
             steps {
 		    script{
-                      maven.itegrationtest()
+                      maven.integrationtest()
             }
 	    }
         }
