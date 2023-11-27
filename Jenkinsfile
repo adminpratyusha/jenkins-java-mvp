@@ -49,8 +49,7 @@ agent any
 	    }
         }
 	    stage('CODE ANALYSIS with SONARQUBE') {
-          
-		  environment {
+          		  environment {
              scannerHome = tool 'sonar-scanner'
           }
 
