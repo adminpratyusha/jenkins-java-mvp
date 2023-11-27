@@ -1,4 +1,4 @@
-
+@Library('shared-library')
 pipeline {
        triggers {
     pollSCM('* * * * *') // Enabling being build on Push
