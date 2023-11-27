@@ -42,7 +42,7 @@ agent any
 	    stage('UNIT TEST'){
             steps {
 		    script {
-                sh 'mvn test'
+                      maven.unittest()
 		    }
             }
         }
@@ -50,7 +50,7 @@ agent any
 	  stage('INTEGRATION TEST'){
             steps {
 		    script{
-                sh 'mvn verify -DskipUnitTests'
+                      maven.itegrationtest()
             }
 	    }
         }
