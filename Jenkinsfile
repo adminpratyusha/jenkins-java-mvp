@@ -29,8 +29,9 @@ agent any
             }
         }
 	    stage('OWASP Dependency-Check Vulnerabilities') {
+		    script{
             dependencycheck.owaspdependency()
-            }
+            }}
 	    stage('UNIT TEST'){
             steps {
 		    script {
