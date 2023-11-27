@@ -19,8 +19,8 @@ pipeline {
         
         stage('BUILD'){
             steps {
-                sh 'mvn clean install -DskipTests'
-            }
+               maven.build()
+	    }
             post {
                 success {
                     echo 'Now Archiving...'
