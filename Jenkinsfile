@@ -8,8 +8,8 @@ pipeline {
     IMAGE_NAME = 'pratyusha2001/mvpjava'
     NEXUS_VERSION = "nexus3"
     NEXUS_PROTOCOL = "http"
-    NEXUS_REPOSITORY = "mvpjava"
-    NEXUS_REPO_ID = "mvpjava"
+    NEXUS_REPOSITORY = "mvp-java-develop"
+    NEXUS_REPO_ID = "mvp-java-develop"
     NEXUS_CREDENTIAL_ID = "nexuslogin"
     DOCKER_CREDENTIALS_ID = 'dockercred' // Update this with your actual Jenkins credentials ID
     ARTVERSION = "${env.BUILD_ID}"
