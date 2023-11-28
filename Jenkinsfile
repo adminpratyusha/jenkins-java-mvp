@@ -8,33 +8,33 @@ pipeline {
     IMAGE_NAME = 'pratyusha2001/mvpjava-release'
     NEXUS_VERSION = "nexus3"
     NEXUS_PROTOCOL = "http"
-    NEXUS_REPOSITORY = "mvptest"
-    NEXUS_REPO_ID = "mvptest"
+    NEXUS_REPOSITORY = "mvp-java-release"
+    NEXUS_REPO_ID = "mvp-java-release"
     NEXUS_CREDENTIAL_ID = "nexuslogin"
     DOCKER_CREDENTIALS_ID = 'dockercred' // Update this with your actual Jenkins credentials ID
     ARTVERSION = "${env.BUILD_ID}"
   }
   stages {
-    // stage('BUILD') {
-    //   steps {
-    //     script {
-    //       maven.build()
-    //     }
-    //   }
-    //   post {
-    //     success {
-    //       echo 'Now Archiving...'
-    //       archiveArtifacts artifacts: '**/target/*.war'
-    //     }
-    //   }
-    // }
-    // stage('OWASP Dependency-Check Vulnerabilities') {
-    //   steps {
-    //     script {
-    //       dependencycheck.owaspdependency()
-    //     }
-    //   }
-    // }
+    stage('BUILD') {
+      steps {
+        script {
+          maven.build()
+        }
+      }
+      post {
+        success {
+          echo 'Now Archiving...'
+          archiveArtifacts artifacts: '**/target/*.war'
+        }
+      }
+    }
+    stage('OWASP Dependency-Check Vulnerabilities') {
+      steps {
+        script {
+          dependencycheck.owaspdependency()
+        }
+      }
+    }
     stage('UNIT TEST') {
       steps {
         script {
@@ -50,37 +50,37 @@ pipeline {
         }
       }
     }
-    // stage('CODE ANALYSIS with SONARQUBE') {
-    //   environment {
-    //     scannerHome = tool 'sonar-scanner'
-    //   }
+    stage('CODE ANALYSIS with SONARQUBE') {
+      environment {
+        scannerHome = tool 'sonar-scanner'
+      }
 
-    //   steps {
-    //     script {
-    //       withSonarQubeEnv('sonarqube') {
-    //         sonarqube.sonarscanner('release-java-mvp', 'release-java-mvp')
-    //       }
-    //     }
-    //   }
-    // }
+      steps {
+        script {
+          withSonarQubeEnv('sonarqube') {
+            sonarqube.sonarscanner('release-java-mvp', 'release-java-mvp')
+          }
+        }
+      }
+    }
     stage("Publish to Nexus Repository Manager") {
       steps {
         script {
           withCredentials([string(credentialsId: 'nexusurl', variable: 'NEXUS_URL')]) {
-            nexusrepo.nexus(NEXUS_URL)
+            nexusrepo.nexus(NEXUS_URL,env.BUILD_ID)
 
           }
         }
       }
     }
-    // stage('DOCKER BUILD & PUSH') {
-    //   steps {
-    //     script {
+    stage('DOCKER BUILD & PUSH') {
+      steps {
+        script {
 
-    //       dockertask.dockertask(env.IMAGE_NAME, env.BUILD_ID, env.DOCKER_CREDENTIALS_ID)
-    //     }
-    //   }
-    // }
+          dockertask.dockertask(env.IMAGE_NAME, env.BUILD_ID, env.DOCKER_CREDENTIALS_ID)
+        }
+      }
+    }
 
   }
 }
