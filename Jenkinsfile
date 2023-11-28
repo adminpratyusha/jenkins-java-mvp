@@ -78,7 +78,7 @@ agent any
             steps {
                 script {
     
-                      docker.dockertask(env.IMAGE_NAME,env.BUILD_ID,env.DOCKER_CREDENTIALS_ID)
+                      dockertask.dockertask(env.IMAGE_NAME,env.BUILD_ID,env.DOCKER_CREDENTIALS_ID)
                     }
                 }
             }
