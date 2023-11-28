@@ -11,6 +11,8 @@ agent any
                 NEXUS_REPOSITORY = "mvpjava"
 	        NEXUS_REPO_ID    = "mvpjava"
                 NEXUS_CREDENTIAL_ID = "nexuslogin"
+	        DOCKER_CREDENTIALS_ID = 'dockercred'  // Update this with your actual Jenkins credentials ID
+
                 ARTVERSION = "${env.BUILD_ID}"
 	}
 	stages{
@@ -76,7 +78,7 @@ agent any
             steps {
                 script {
     
-                      docker.docker(env.IMAGE_NAME,env.BUILD_ID,dockercred)
+                      docker.docker(env.IMAGE_NAME,env.BUILD_ID,env.DOCKER_CREDENTIALS_ID)
                     }
                 }
             }
