@@ -5,11 +5,11 @@ pipeline {
   }
   agent any
   environment {
-    IMAGE_NAME = 'pratyusha2001/mvpjava'
+    IMAGE_NAME = 'pratyusha2001/mvpjava-release'
     NEXUS_VERSION = "nexus3"
     NEXUS_PROTOCOL = "http"
-    NEXUS_REPOSITORY = "mvpjava"
-    NEXUS_REPO_ID = "mvpjava"
+    NEXUS_REPOSITORY = "mvpjava-release"
+    NEXUS_REPO_ID = "mvpjava-release"
     NEXUS_CREDENTIAL_ID = "nexuslogin"
     DOCKER_CREDENTIALS_ID = 'dockercred' // Update this with your actual Jenkins credentials ID
     ARTVERSION = "${env.BUILD_ID}"
@@ -58,7 +58,7 @@ pipeline {
       steps {
         script {
           withSonarQubeEnv('sonarqube') {
-            sonarqube.sonarscanner('Java', 'java')
+            sonarqube.sonarscanner('release-java-mvp', 'release-java-mvp')
           }
         }
       }
