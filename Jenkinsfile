@@ -67,7 +67,7 @@ pipeline {
       steps {
         script {
           withCredentials([string(credentialsId: 'nexusurl', variable: 'NEXUS_URL')]) {
-            nexusrepo.nexus(NEXUS_URL)
+            nexusrepo.nexus(NEXUS_URL,env.BUILD_ID)
 
           }
         }
@@ -82,5 +82,5 @@ pipeline {
 //       }
 //     }
 
-//   }
-// }
+  }
+}
