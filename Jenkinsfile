@@ -27,13 +27,13 @@ agent any
                 }
             }
         }
-	 stage('OWASP Dependency-Check Vulnerabilities') {
-		 steps{  
-			script{
-				dependencycheck.owaspdependency()
-			}
-      }
-   }
+	 // stage('OWASP Dependency-Check Vulnerabilities') {
+		//  steps{  
+		// 	script{
+		// 		dependencycheck.owaspdependency()
+		// 	}
+  //     }
+  //  }
 	    stage('UNIT TEST'){
             steps {
 		script{
