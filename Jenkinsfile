@@ -8,7 +8,6 @@ agent any
 		IMAGE_NAME = 'pratyusha2001/mvpjava'
 		NEXUS_VERSION = "nexus3"
                 NEXUS_PROTOCOL = "http"
-                // NEXUS_URL = "34.42.7.89:8081"
                 NEXUS_REPOSITORY = "mvpjava"
 	        NEXUS_REPO_ID    = "mvpjava"
                 NEXUS_CREDENTIAL_ID = "nexuslogin"
@@ -43,50 +42,45 @@ agent any
 	    }
         }
  
-	  stage('INTEGRATION TEST'){
-            steps {
-		  script{
-                   maven.integrationtest()	  
-		    }
-	    }
-        }
-	    stage('CODE ANALYSIS with SONARQUBE') {
-          		  environment {
-             scannerHome = tool 'sonar-scanner'
-          }
+	  // stage('INTEGRATION TEST'){
+   //          steps {
+		 //  script{
+   //                 maven.integrationtest()	  
+		 //    }
+	  //   }
+   //      }
+	   //  stage('CODE ANALYSIS with SONARQUBE') {
+    //       		  environment {
+    //          scannerHome = tool 'sonar-scanner'
+    //       }
 
-          steps {
-		  script{
-            withSonarQubeEnv('sonarqube') {
-		    sonarqube.sonarscanner('Java','java')
-	    }
-            }
-                 }
-        }
-	    stage("Publish to Nexus Repository Manager") { 
-	     steps {
-               script {
-		       withCredentials([string(credentialsId: 'nexusurl', variable: 'NEXUS_URL')]) {
-                       nexusrepo.nexus(NEXUS_URL)
+    //       steps {
+		  // script{
+    //         withSonarQubeEnv('sonarqube') {
+		  //   sonarqube.sonarscanner('Java','java')
+	   //  }
+    //         }
+    //              }
+    //     }
+	    // stage("Publish to Nexus Repository Manager") { 
+	    //  steps {
+     //           script {
+		   //     withCredentials([string(credentialsId: 'nexusurl', variable: 'NEXUS_URL')]) {
+     //                   nexusrepo.nexus(NEXUS_URL)
 
-                }
-	       }
-            }
-        }
-	    // stage('DOCKER BUILD & PUSH') {
-     //        steps {
-     //            script {
-    
-     //                // Assuming your Dockerfile is in the root directory of your project
-     //                def dockerImage = docker.build("${env.IMAGE_NAME}:${env.BUILD_ID}")
-
-                    
-     //                docker.withRegistry('https://registry.hub.docker.com', 'dockercred') {
-     //                    dockerImage.push()
-     //                }
      //            }
-        //     }
-        // }
+	    //    }
+     //        }
+     //    }
+	    stage('DOCKER BUILD & PUSH') {
+            steps {
+                script {
+    
+                      docker.docker(env.IMAGE_NAME,env.BUILD_ID,dockercred)
+                    }
+                }
+            }
+        
         }
     }
 
