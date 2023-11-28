@@ -43,13 +43,13 @@ pipeline {
       }
     }
 
-    // stage('INTEGRATION TEST') {
-    //   steps {
-    //     script {
-    //       maven.integrationtest()
-    //     }
-    //   }
-    // }
+    stage('INTEGRATION TEST') {
+      steps {
+        script {
+          maven.integrationtest()
+        }
+      }
+    }
     // stage('CODE ANALYSIS with SONARQUBE') {
     //   environment {
     //     scannerHome = tool 'sonar-scanner'
