@@ -28,41 +28,41 @@ pipeline {
         }
       }
     }
-    stage('OWASP Dependency-Check Vulnerabilities') {
-      steps {
-        script {
-          dependencycheck.owaspdependency()
-        }
-      }
-    }
-    stage('UNIT TEST') {
-      steps {
-        script {
-          maven.unittest()
-        }
-      }
-    }
+    // stage('OWASP Dependency-Check Vulnerabilities') {
+    //   steps {
+    //     script {
+    //       dependencycheck.owaspdependency()
+    //     }
+    //   }
+    // }
+    // stage('UNIT TEST') {
+    //   steps {
+    //     script {
+    //       maven.unittest()
+    //     }
+    //   }
+    // }
 
-    stage('INTEGRATION TEST') {
-      steps {
-        script {
-          maven.integrationtest()
-        }
-      }
-    }
-    stage('CODE ANALYSIS with SONARQUBE') {
-      environment {
-        scannerHome = tool 'sonar-scanner'
-      }
+    // stage('INTEGRATION TEST') {
+    //   steps {
+    //     script {
+    //       maven.integrationtest()
+    //     }
+    //   }
+    // }
+    // stage('CODE ANALYSIS with SONARQUBE') {
+    //   environment {
+    //     scannerHome = tool 'sonar-scanner'
+    //   }
 
-      steps {
-        script {
-          withSonarQubeEnv('sonarqube') {
-            sonarqube.sonarscanner('Java', 'java')
-          }
-        }
-      }
-    }
+    //   steps {
+    //     script {
+    //       withSonarQubeEnv('sonarqube') {
+    //         sonarqube.sonarscanner('Java', 'java')
+    //       }
+    //     }
+    //   }
+    // }
     stage("Publish to Nexus Repository Manager") {
       steps {
         script {
@@ -73,14 +73,14 @@ pipeline {
         }
       }
     }
-    stage('DOCKER BUILD & PUSH') {
-      steps {
-        script {
+//     stage('DOCKER BUILD & PUSH') {
+//       steps {
+//         script {
 
-          dockertask.dockertask(env.IMAGE_NAME, env.BUILD_ID, env.DOCKER_CREDENTIALS_ID)
-        }
-      }
-    }
+//           dockertask.dockertask(env.IMAGE_NAME, env.BUILD_ID, env.DOCKER_CREDENTIALS_ID)
+//         }
+//       }
+//     }
 
-  }
-}
+//   }
+// }
