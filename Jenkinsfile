@@ -1,6 +1,5 @@
 pipeline {
     agent any
-
     environment {
         // SSHCONFIGNAME='sshtest'
         GROUP_ID = 'com/visualpathit/vprofile'
