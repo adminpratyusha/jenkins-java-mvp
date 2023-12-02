@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        SSHCONFIGNAME='sshtest'
+        // SSHCONFIGNAME='sshtest'
         GROUP_ID = 'com/visualpathit/vprofile'
         NEXUS_URL = 'nexusurl'
         NEXUS_REPO_ID = 'nexusrepo-release'
