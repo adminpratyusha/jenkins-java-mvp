@@ -30,4 +30,23 @@ pipeline {
             }
         }
         }
+        stage('Stop tomcat and remote old version files') {
+            steps {
+                script {
+                      sshPublisher(publishers: [sshPublisherDesc(configName: SSHCONFIGNAME , transfers: [
+                                    sshTransfer(
+                                        execCommand: "sudo systemctl stop tomcat9 -y && sudo rm -rf /var/lib/tomcat9/webapps/*",
+                                        execTimeout: 120000
+                                    )
+                                ])
+                    ])
+                
+                }
+               
+                
+            }
+        }
+
+
+      
     }}
