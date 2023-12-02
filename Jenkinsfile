@@ -5,6 +5,8 @@ pipeline {
         PACKAGE_NAME = 'mvp-java-release'
         OUTPUTFILENAME="vprofile-1.0.war"
         SSHCONFIGNAME='sshtest'
+        GROUP_ID = 'com/visualpathit/vprofile'
+
     }
 
     parameters {
@@ -24,7 +26,7 @@ pipeline {
                         string(credentialsId: 'nexususername', variable: 'NEXUS_USERNAME')
                     ]) {
 
-  sh "curl -v -o ${OUTPUTFILENAME} -u ${NEXUS_USERNAME}:${NEXUS_PASSWORD} ${NEXUS_URL}/repository/${NEXUS_REPO_ID}/${PACKAGE_NAME}/1.0/${PACKAGE_NAME}-${VERSION}.war"                    
+  sh "curl -v -o ${OUTPUTFILENAME} -u ${NEXUS_USERNAME}:${NEXUS_PASSWORD} ${NEXUS_URL}/repository/${NEXUS_REPO_ID}/${GROUP_ID}/${PACKAGE_NAME}/${PACKAGE_NAME}-${VERSION}"                    
 
 
         }
