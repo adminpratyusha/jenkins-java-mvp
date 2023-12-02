@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         PACKAGE_NAME = 'mvp-java-release'
-        OUTPUTFILENAME="target.war"
+        OUTPUTFILENAME="vprofile-1.0.war"
         SSHCONFIGNAME='sshtest'
     }
 
@@ -47,7 +47,7 @@ pipeline {
                 
             }
         }
-
+        
 
       
     }}
