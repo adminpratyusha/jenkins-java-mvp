@@ -3,7 +3,7 @@ pipeline {
     environment {
         // SSHCONFIGNAME='sshtest'
         GROUP_ID = 'com/visualpathit/vprofile'
-        NEXUS_URL = 'nexusurl'
+        NEXUS_URL = 'nexusdownloadurl'
         NEXUS_REPO_ID = 'nexusrepo-release'
         NEXUS_USERNAME = 'nexususername'
         NEXUS_PASSWORD = 'nexuspassword'
@@ -20,7 +20,7 @@ pipeline {
                 script {
                 
                     
-                    def nexusArtifactUrl = "http://${NEXUS_URL}/repository/${NEXUS_REPO_ID}/${GROUP_ID}/${VERSION}"
+                    def nexusArtifactUrl = "${NEXUS_URL}/repository/${NEXUS_REPO_ID}/${GROUP_ID}/${VERSION}"
                     
                     echo "Downloading artifact from: ${nexusArtifactUrl}"
 
