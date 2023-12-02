@@ -23,7 +23,7 @@ pipeline {
                         string(credentialsId: 'nexususername', variable: 'NEXUS_USERNAME')
                     ]) {
 
-  sh "curl -v -o ${OUTPUTFILENAME} -u ${NEXUS_USERNAME}:${NEXUS_PASSWORD} ${NEXUS_URL}/repository/${NEXUS_REPO_ID}/${PACKAGE_NAME}/1.0/${PACKAGE_NAME}-${APP_VERSION}.war"                    
+  sh "curl -v -o ${OUTPUTFILENAME} -u ${NEXUS_USERNAME}:${NEXUS_PASSWORD} ${NEXUS_URL}/repository/${NEXUS_REPO_ID}/${PACKAGE_NAME}/1.0/${PACKAGE_NAME}-${VERSION}.war"                    
 
 
         }
