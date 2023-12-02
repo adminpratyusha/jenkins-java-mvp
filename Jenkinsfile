@@ -20,7 +20,7 @@ pipeline {
                 script {
                 
                     
-                    def nexusArtifactUrl = "${NEXUS_URL}/repository/${NEXUS_REPO_ID}/${GROUP_ID}/${VERSION}"
+                    def nexusArtifactUrl = "http://${NEXUS_URL}/repository/${NEXUS_REPO_ID}/${GROUP_ID}/${VERSION}"
                     
                     echo "Downloading artifact from: ${nexusArtifactUrl}"
 
