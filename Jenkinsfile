@@ -11,7 +11,6 @@ pipeline {
         OUTPUTFILENAME = 'vprofile-1.0.war'
 
     }
-
     parameters {
         string(name: 'VERSION', defaultValue: '1.0-23', description: 'Enter the version along with build id')
     }
