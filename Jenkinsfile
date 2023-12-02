@@ -4,6 +4,7 @@ pipeline {
     environment {
         PACKAGE_NAME = 'mvp-java-release'
         OUTPUTFILENAME="target.war"
+        SSHCONFIGNAME='sshtest'
     }
 
     parameters {
