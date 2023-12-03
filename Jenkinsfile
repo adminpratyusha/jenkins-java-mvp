@@ -20,9 +20,9 @@ pipeline {
                 script {
                 
                     withCredentials([
-                        string(credentialsId: 'nexusdownloadurl', variable: 'NEXUS_URL')
-                        string(credentialsId: 'nexususername', variable: 'NEXUS_USERNAME')
-                        string(credentialsId: 'nexuspassword', variable: 'NEXUS_PASSWORD')
+                        string(credentialsId: 'nexusdownloadurl', variable: 'NEXUS_URL'),
+                        string(credentialsId: 'nexususername', variable: 'NEXUS_USERNAME'),
+                        string(credentialsId: 'nexuspassword', variable: 'NEXUS_PASSWORD'),
                         string(credentialsId: 'nexusrepo-release', variable: 'NEXUS_REPO_ID')
                     ])
                     {
