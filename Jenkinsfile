@@ -22,7 +22,7 @@ pipeline {
                     
                    
                     
-                    echo "Downloading artifact from: ${nexusArtifactUrl}"
+                    // echo "Downloading artifact from: ${nexusArtifactUrl}"
 sh "curl -v -o ${OUTPUTFILENAME} -u ${NEXUS_USERNAME}:${NEXUS_PASSWORD} ${NEXUS_URL}/repository/${NEXUS_REPO_ID}/${GROUP_ID}/${VERSION}"
                     // sh "curl -v -o ${OUTPUTFILENAME} -u ${NEXUS_USERNAME}:${NEXUS_PASSWORD} ${nexusArtifactUrl}"
                     
