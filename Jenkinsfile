@@ -1,12 +1,8 @@
 pipeline {
     agent any
     environment {
-        // SSHCONFIGNAME='sshtest'
+        SSHCONFIGNAME='sshtest'
         GROUP_ID = 'com/visualpathit/vprofile'
-        // NEXUS_URL = 'nexusdownloadurl'
-        // NEXUS_REPO_ID = 'nexusrepo-release'
-        // NEXUS_USERNAME = 'nexususername'
-        // NEXUS_PASSWORD = 'nexuspassword'
         OUTPUTFILENAME = 'vprofile-1.0.war'
 
     }
@@ -29,11 +25,8 @@ pipeline {
    
                    
                     
-                    // echo "Downloading artifact from: ${nexusArtifactUrl}"
-sh "curl -v -o ${OUTPUTFILENAME} -u ${NEXUS_USERNAME}:${NEXUS_PASSWORD} ${NEXUS_URL}/repository/${NEXUS_REPO_ID}/${GROUP_ID}/${VERSION}"
-                    // sh "curl -v -o ${OUTPUTFILENAME} -u ${NEXUS_USERNAME}:${NEXUS_PASSWORD} ${nexusArtifactUrl}"
+                 sh "curl -v -o ${OUTPUTFILENAME} -u ${NEXUS_USERNAME}:${NEXUS_PASSWORD} ${NEXUS_URL}/repository/${NEXUS_REPO_ID}/${GROUP_ID}/${VERSION}"
                     }
-                    // Check if the artifact download was successful
                     if (fileExists(OUTPUTFILENAME)) {
                         echo "Artifact downloaded successfully."
                     } else {
@@ -44,24 +37,24 @@ sh "curl -v -o ${OUTPUTFILENAME} -u ${NEXUS_USERNAME}:${NEXUS_PASSWORD} ${NEXUS_
         }
             }
         }
-        }
-        // stage('Stop tomcat and remote old version files') {
-        //     steps {
-        //         script {
-        //               sshPublisher(publishers: [sshPublisherDesc(configName: SSHCONFIGNAME , transfers: [
-        //                             sshTransfer(
-        //                                 execCommand: "sudo systemctl stop tomcat9 -y && sudo rm -rf /var/lib/tomcat9/webapps/*",
-        //                                 execTimeout: 120000
-        //                             )
-        //                         ])
-        //             ])
+        
+        stage('Stop tomcat and remote old version files') {
+            steps {
+                script {
+                      sshPublisher(publishers: [sshPublisherDesc(configName: SSHCONFIGNAME , transfers: [
+                                    sshTransfer(
+                                        execCommand: "sudo systemctl stop tomcat9 -y && sudo rm -rf /var/lib/tomcat9/webapps/*",
+                                        execTimeout: 120000
+                                    )
+                                ])
+                    ])
                 
-        //         }
+                }
                
                 
-        //     }
-        // }
+            }
+        }
         
 
-      
+    } 
     }
