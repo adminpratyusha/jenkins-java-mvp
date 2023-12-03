@@ -59,7 +59,7 @@ pipeline {
                 script {
                  
                     sshPublisher(publishers: [sshPublisherDesc(configName: SSHCONFIGNAME ,
-                        transfers: [sshTransfer(flatten: false, sourceFiles: "${OUTPUTFILENAME}/**")])
+                        transfers: [sshTransfer(flatten: false, sourceFiles: "vprofile-1.0.war")])
                     ])
 
 
