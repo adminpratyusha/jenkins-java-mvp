@@ -20,11 +20,11 @@ pipeline {
                 script {
                 
                     
-                    def nexusArtifactUrl = "${NEXUS_URL}/repository/${NEXUS_REPO_ID}/${GROUP_ID}/${VERSION}"
+                   
                     
                     echo "Downloading artifact from: ${nexusArtifactUrl}"
-
-                    sh "curl -v -o ${OUTPUTFILENAME} -u ${NEXUS_USERNAME}:${NEXUS_PASSWORD} ${nexusArtifactUrl}"
+sh "curl -v -o ${OUTPUTFILENAME} -u ${NEXUS_USERNAME}:${NEXUS_PASSWORD} ${NEXUS_URL}/repository/${NEXUS_REPO_ID}/${GROUP_ID}/${VERSION}"
+                    // sh "curl -v -o ${OUTPUTFILENAME} -u ${NEXUS_USERNAME}:${NEXUS_PASSWORD} ${nexusArtifactUrl}"
                     
                     // Check if the artifact download was successful
                     if (fileExists(OUTPUTFILENAME)) {
