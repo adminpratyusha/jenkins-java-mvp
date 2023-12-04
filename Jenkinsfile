@@ -14,8 +14,7 @@ pipeline {
         stage('Download artifact from Nexus') {
             steps {
                 script {
-                    def outputFile = "vprofile-${VERSION}.war"
-                    sh "curl -v -o ${outputFile} -u admin:admin ${NEXUS_URL}/${GROUP_ID}/${VERSION}/${outputFile}"
+                    sh "curl -v -o vprofile.war -u admin:admin ${NEXUS_URL}/${GROUP_ID}/${VERSION}/${outputFile}"
 
                     if (fileExists(outputFile)) {
                         echo "Artifact downloaded successfully."
