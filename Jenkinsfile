@@ -23,7 +23,7 @@ pipeline {
                          string(credentialsId: 'nexuspassword', variable: 'NEXUS_PASSWORD'),
                      ])
                      {
-                        downloadnexusartifact.download(OUTPUTFILENAME,NEXUS_URL,NEXUS_USERNAME,NEXUS_PASSWORD,env.GROUP_ID,ARTIFACT_NAME,params.VERSION)
+                        downloadnexusartifact.download(OUTPUTFILENAME,NEXUS_USERNAME,NEXUS_PASSWORD,NEXUS_URL,env.GROUP_ID,params.VERSION,ARTIFACT_NAME)
                 
                      }
                              
