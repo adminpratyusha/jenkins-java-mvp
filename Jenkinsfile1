@@ -2,8 +2,9 @@ pipeline {
     agent any
     environment {
         SSHCONFIGNAME='sshtest'
-        // GROUP_ID = 'com/visualpathit/vprofile'
-        // OUTPUTFILENAME = 'vprofile-1.0.war'
+        GROUP_ID = 'com/visualpathit/vprofile'
+         OUTPUTFILENAME = 'vprofile.war'
+         ARTIFACT_NAME='vprofile'
 
     }
     parameters {
@@ -15,23 +16,18 @@ pipeline {
             steps {
                 script {
                 
-                    // withCredentials([
-                    //     string(credentialsId: 'nexusdownloadurl', variable: 'NEXUS_URL'),
-                    //     string(credentialsId: 'nexususername', variable: 'NEXUS_USERNAME'),
-                    //     string(credentialsId: 'nexuspassword', variable: 'NEXUS_PASSWORD'),
-                    //     string(credentialsId: 'nexusrepo-release', variable: 'NEXUS_REPO_ID')
-                    // ])
-                    // {
+                     withCredentials([
+                         string(credentialsId: 'nexusdownloadurl', variable: 'NEXUS_URL'),
+                         string(credentialsId: 'nexususername', variable: 'NEXUS_USERNAME'),
+                         string(credentialsId: 'nexuspassword', variable: 'NEXUS_PASSWORD'),
+                         string(credentialsId: 'nexusrepo-release', variable: 'NEXUS_REPO_ID')
+                     ])
+                     {
    
-                   
-                   sh 'curl -v -o "vprofile-1.0.war" -u "admin:admin" "http://34.42.7.89:8081/repository/mvp-java-release/com/visualpathit/vprofile/1.0-23/vprofile-1.0-23.war"' 
-                 // sh "curl -v -o ${OUTPUTFILENAME} -u ${NEXUS_USERNAME}:${NEXUS_PASSWORD} ${NEXUS_URL}/repository/${NEXUS_REPO_ID}/${GROUP_ID}/${VERSION}/${VERSION}"
-                    // }
-                    if (fileExists(OUTPUTFILENAME)) {
-                        echo "Artifact downloaded successfully."
-                    } else {
-                        error "Failed to download artifact."
-                    }                 
+                  def artifact_version = "${ARTIFACT_NAME}-${params.VERSION}.war"
+                  sh "curl -v -o ${OUTPUTFILENAME} -u ${NEXUS_USERNAME}:${NEXUS_PASSWORD} ${NEXUS_URL}/${GROUP_ID}/${VERSION}/${artifact_version}"
+                     }
+                             
 
 
         }
@@ -43,7 +39,7 @@ pipeline {
                 script {
                       sshPublisher(publishers: [sshPublisherDesc(configName: SSHCONFIGNAME , transfers: [
                                     sshTransfer(
-                                        execCommand: "sudo systemctl stop tomcat9 -y && sudo rm -rf /var/lib/tomcat9/webapps/*",
+                                        execCommand: "sudo systemctl stop tomcat9 && sudo rm -rf /var/lib/tomcat9/webapps/*",
                                         execTimeout: 120000
                                     )
                                 ])
@@ -57,9 +53,8 @@ pipeline {
         stage('Deploy to VM') {
             steps {
                 script {
-                 
                     sshPublisher(publishers: [sshPublisherDesc(configName: SSHCONFIGNAME ,
-                        transfers: [sshTransfer(flatten: false, sourceFiles: "vprofile-1.0.war")])
+                        transfers: [sshTransfer(flatten: false, sourceFiles: OUTPUTFILENAME)])
                     ])
 
 
