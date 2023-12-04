@@ -67,7 +67,7 @@ pipeline {
             }
         }
         
-         stage('start tomcaat') {
+         stage('start tomcat') {
             steps {
                 script {
                     sshPublisher(publishers: [sshPublisherDesc(configName: SSHCONFIGNAME, transfers: [
