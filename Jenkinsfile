@@ -14,8 +14,8 @@ pipeline {
         stage('Download artifact from Nexus') {
             steps {
                 script {
-                    def outputFile = "vprofile-1.0-23.war"
-                    sh "curl -v -o vprofile-1.0.war -u admin:admin ${NEXUS_URL}/${GROUP_ID}/${VERSION}/${outputFile}"
+                    def outputFile = "vprofile-${params.VERSION}.war"
+                    sh "curl -v -o vprofile.war -u admin:admin ${NEXUS_URL}/${GROUP_ID}/${VERSION}/${outputFile}"
 
                     if (fileExists(outputFile)) {
                         echo "Artifact downloaded successfully."
@@ -42,7 +42,7 @@ pipeline {
         stage('Deploy to VM') {
             steps {
                 script {
-                    def outputFile = "vprofile-1.0.war"
+                    def outputFile = "vprofile.war"
                     sshPublisher(publishers: [sshPublisherDesc(configName: SSHCONFIGNAME ,
                         transfers: [sshTransfer(flatten: false, sourceFiles: outputFile)])
                     ])
