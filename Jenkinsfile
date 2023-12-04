@@ -42,7 +42,7 @@ pipeline {
         stage('Deploy to VM') {
             steps {
                 script {
-                    def outputFile = "vprofile.war"
+                    def outputFile = "vprofile-1.0.war"
                     sshPublisher(publishers: [sshPublisherDesc(configName: SSHCONFIGNAME ,
                         transfers: [sshTransfer(flatten: false, sourceFiles: outputFile)])
                     ])
