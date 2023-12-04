@@ -39,28 +39,28 @@ pipeline {
             }
         }
 
-        // stage('Deploy to VM') {
-        //     steps {
-        //         script {
-        //             def outputFile = "vprofile-${VERSION}.war"
-        //             sshPublisher(publishers: [sshPublisherDesc(configName: SSHCONFIGNAME ,
-        //                 transfers: [sshTransfer(flatten: false, sourceFiles: outputFile)])
-        //             ])
-        //         }
-        //     }
-        // }
+        stage('Deploy to VM') {
+            steps {
+                script {
+                    def outputFile = "vprofile-${VERSION}.war"
+                    sshPublisher(publishers: [sshPublisherDesc(configName: SSHCONFIGNAME ,
+                        transfers: [sshTransfer(flatten: false, sourceFiles: outputFile)])
+                    ])
+                }
+            }
+        }
 
-        // stage('Start tomcat') {
-        //     steps {
-        //         script {
-        //             sshPublisher(publishers: [sshPublisherDesc(configName: SSHCONFIGNAME, transfers: [
-        //                 sshTransfer(
-        //                     execCommand: "sudo cp -rf /home/ubuntu/* /var/lib/tomcat9/webapps && rm -rf /home/ubuntu/* && sudo systemctl start tomcat9",
-        //                     execTimeout: 120000
-        //                 )
-        //             ])])
-        //         }
-        //     }
-        // }
+        stage('Start tomcat') {
+            steps {
+                script {
+                    sshPublisher(publishers: [sshPublisherDesc(configName: SSHCONFIGNAME, transfers: [
+                        sshTransfer(
+                            execCommand: "sudo cp -rf /home/ubuntu/* /var/lib/tomcat9/webapps && rm -rf /home/ubuntu/* && sudo systemctl start tomcat9",
+                            execTimeout: 120000
+                        )
+                    ])])
+                }
+            }
+        }
     }
 }
