@@ -15,7 +15,7 @@ pipeline {
             steps {
                 script {
                     def outputFile = "vprofile-1.0-23.war"
-                    sh "curl -v -o vprofile.war -u admin:admin ${NEXUS_URL}/${GROUP_ID}/${VERSION}/${outputFile}"
+                    sh "curl -v -o vprofile-1.0.war -u admin:admin ${NEXUS_URL}/${GROUP_ID}/${VERSION}/${outputFile}"
 
                     if (fileExists(outputFile)) {
                         echo "Artifact downloaded successfully."
