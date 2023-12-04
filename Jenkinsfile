@@ -20,12 +20,10 @@ pipeline {
                          string(credentialsId: 'nexusdownloadurl', variable: 'NEXUS_URL'),
                          string(credentialsId: 'nexususername', variable: 'NEXUS_USERNAME'),
                          string(credentialsId: 'nexuspassword', variable: 'NEXUS_PASSWORD'),
-                         string(credentialsId: 'nexusrepo-release', variable: 'NEXUS_REPO_ID')
                      ])
                      {
-   
-                  def artifact_version = "${ARTIFACT_NAME}-${params.VERSION}.war"
-                  sh "curl -v -o ${OUTPUTFILENAME} -u ${NEXUS_USERNAME}:${NEXUS_PASSWORD} ${NEXUS_URL}/${GROUP_ID}/${VERSION}/${artifact_version}"
+                        downloadnexusartifact.download(OUTPUTFILENAME,NEXUS_URL,NEXUS_USERNAME,NEXUS_PASSWORD,env.GROUP_ID,ARTIFACT_NAME,params.VERSION)
+                
                      }
                              
 
