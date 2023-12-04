@@ -24,8 +24,8 @@ pipeline {
                     {
    
                    
-                    
-                 sh "curl -v -o ${OUTPUTFILENAME} -u ${NEXUS_USERNAME}:${NEXUS_PASSWORD} ${NEXUS_URL}/repository/${NEXUS_REPO_ID}/${GROUP_ID}/${VERSION}"
+                   // curl -v -o "vprofile-1.0.war" -u "admin:admin" "http://34.42.7.89:8081/repository/mvp-java-release/com/visualpathit/vprofile/1.0-23/vprofile-1.0-23.war" 
+                 sh "curl -v -o ${OUTPUTFILENAME} -u ${NEXUS_USERNAME}:${NEXUS_PASSWORD} ${NEXUS_URL}/repository/${NEXUS_REPO_ID}/${GROUP_ID}/${VERSION}/${VERSION}"
                     }
                     if (fileExists(OUTPUTFILENAME)) {
                         echo "Artifact downloaded successfully."
