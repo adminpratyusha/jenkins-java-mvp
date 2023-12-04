@@ -18,11 +18,6 @@ pipeline {
                     def artifact_version = "${ARTIFACT_NAME}-${params.VERSION}.war"
                     sh "curl -v -o vprofile.war -u admin:admin ${NEXUS_URL}/${GROUP_ID}/${VERSION}/${artifact_version}"
 
-                    if (fileExists(outputFile)) {
-                        echo "Artifact downloaded successfully."
-                    } else {
-                        error "Failed to download artifact."
-                    }
                 }
             }
         }
