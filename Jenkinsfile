@@ -26,23 +26,14 @@ pipeline {
                         downloadnexusartifact.download(OUTPUTFILENAME,NEXUS_USERNAME,NEXUS_PASSWORD,NEXUS_URL,env.GROUP_ID,params.VERSION,ARTIFACT_NAME)
                 
                      }
-                             
-
-
-        }
+             }
             }
         }
         
         stage('Stop tomcat and remote old version files') {
             steps {
                 script {
-                      sshPublisher(publishers: [sshPublisherDesc(configName: SSHCONFIGNAME , transfers: [
-                                    sshTransfer(
-                                        execCommand: "sudo systemctl stop tomcat9 && sudo rm -rf /var/lib/tomcat9/webapps/*",
-                                        execTimeout: 120000
-                                    )
-                                ])
-                    ])
+                     stoptomcat.stop(SSHCONFIGNAME)
                 
                 }
                
@@ -52,25 +43,15 @@ pipeline {
         stage('Deploy to VM') {
             steps {
                 script {
-                    sshPublisher(publishers: [sshPublisherDesc(configName: SSHCONFIGNAME ,
-                        transfers: [sshTransfer(flatten: false, sourceFiles: OUTPUTFILENAME)])
-                    ])
-
-
+                    deploytoVM.deploy(SSHCONFIGNAME,OUTPUTFILENAME)
                 }
             }
         }
         
          stage('start tomcat') {
             steps {
-                script {
-                    sshPublisher(publishers: [sshPublisherDesc(configName: SSHCONFIGNAME, transfers: [
-                                    sshTransfer(
-                                        execCommand: "sudo cp -rf /home/ubuntu/* /var/lib/tomcat9/webapps && rm -rf /home/ubuntu/* && sudo systemctl start tomcat9",
-                                        execTimeout: 120000
-                                    )
-                                ])
-                    ])
+                  script {
+                     starttomcat.start(SSHCONFIGNAME)
                 }
                
                 
