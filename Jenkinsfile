@@ -5,6 +5,7 @@ pipeline {
         NEXUS_URL = 'http://34.42.7.89:8081/repository/mvp-java-release'
         GROUP_ID = 'com/visualpathit/vprofile'
         VERSION = '1.0-23'
+        ARTIFACT_NAME='vprofile'
     }
     parameters {
         string(name: 'VERSION', defaultValue: '1.0-23', description: 'Enter the version along with build id')
@@ -14,8 +15,8 @@ pipeline {
         stage('Download artifact from Nexus') {
             steps {
                 script {
-                    def outputFile = "vprofile-${params.VERSION}.war"
-                    sh "curl -v -o vprofile.war -u admin:admin ${NEXUS_URL}/${GROUP_ID}/${VERSION}/${outputFile}"
+                    def artifact_version = "${ARTIFACT_NAME}-${params.VERSION}.war"
+                    sh "curl -v -o vprofile.war -u admin:admin ${NEXUS_URL}/${GROUP_ID}/${VERSION}/${artifact_version}"
 
                     if (fileExists(outputFile)) {
                         echo "Artifact downloaded successfully."
@@ -42,9 +43,9 @@ pipeline {
         stage('Deploy to VM') {
             steps {
                 script {
-                    def outputFile = "vprofile.war"
+                    def artifactFile = "${ARTIFACT_NAME}.war"
                     sshPublisher(publishers: [sshPublisherDesc(configName: SSHCONFIGNAME ,
-                        transfers: [sshTransfer(flatten: false, sourceFiles: outputFile)])
+                        transfers: [sshTransfer(flatten: false, sourceFiles: artifactFile)])
                     ])
                 }
             }
