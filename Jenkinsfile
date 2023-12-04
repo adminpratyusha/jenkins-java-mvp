@@ -15,18 +15,18 @@ pipeline {
             steps {
                 script {
                 
-                    withCredentials([
-                        string(credentialsId: 'nexusdownloadurl', variable: 'NEXUS_URL'),
-                        string(credentialsId: 'nexususername', variable: 'NEXUS_USERNAME'),
-                        string(credentialsId: 'nexuspassword', variable: 'NEXUS_PASSWORD'),
-                        string(credentialsId: 'nexusrepo-release', variable: 'NEXUS_REPO_ID')
-                    ])
-                    {
+                    // withCredentials([
+                    //     string(credentialsId: 'nexusdownloadurl', variable: 'NEXUS_URL'),
+                    //     string(credentialsId: 'nexususername', variable: 'NEXUS_USERNAME'),
+                    //     string(credentialsId: 'nexuspassword', variable: 'NEXUS_PASSWORD'),
+                    //     string(credentialsId: 'nexusrepo-release', variable: 'NEXUS_REPO_ID')
+                    // ])
+                    // {
    
                    
                    sh 'curl -v -o "vprofile-1.0.war" -u "admin:admin" "http://34.42.7.89:8081/repository/mvp-java-release/com/visualpathit/vprofile/1.0-23/vprofile-1.0-23.war"' 
                  // sh "curl -v -o ${OUTPUTFILENAME} -u ${NEXUS_USERNAME}:${NEXUS_PASSWORD} ${NEXUS_URL}/repository/${NEXUS_REPO_ID}/${GROUP_ID}/${VERSION}/${VERSION}"
-                    }
+                    // }
                     if (fileExists(OUTPUTFILENAME)) {
                         echo "Artifact downloaded successfully."
                     } else {
