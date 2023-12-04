@@ -26,7 +26,7 @@ pipeline {
             }
         }
 
-        stage('Stop tomcat and remote old version files') {
+        stage('Stop tomcat and remove old version files') {
             steps {
                 script {
                     sshPublisher(publishers: [sshPublisherDesc(configName: SSHCONFIGNAME , transfers: [
@@ -42,9 +42,10 @@ pipeline {
         stage('Deploy to VM') {
             steps {
                 script {
-                    def outputFile = "vprofile-${VERSION}.war"
+                    def sourceFile = "vprofile-${VERSION}.war"
+                    def renamedFile = "vprofile-1.0.war"
                     sshPublisher(publishers: [sshPublisherDesc(configName: SSHCONFIGNAME ,
-                        transfers: [sshTransfer(flatten: false, sourceFiles: outputFile)])
+                        transfers: [sshTransfer(flatten: false, sourceFiles: sourceFile, remoteDirectory: '.', execCommand: "mv ${sourceFile} ${renamedFile}")])
                     ])
                 }
             }
@@ -55,7 +56,7 @@ pipeline {
                 script {
                     sshPublisher(publishers: [sshPublisherDesc(configName: SSHCONFIGNAME, transfers: [
                         sshTransfer(
-                            execCommand: "sudo cp -rf /home/ubuntu/* /var/lib/tomcat9/webapps && rm -rf /home/ubuntu/* && sudo systemctl restart tomcat9",
+                            execCommand: "sudo cp -rf /home/ubuntu/${renamedFile} /var/lib/tomcat9/webapps && rm -rf /home/ubuntu/${renamedFile} && sudo systemctl restart tomcat9",
                             execTimeout: 120000
                         )
                     ])])
