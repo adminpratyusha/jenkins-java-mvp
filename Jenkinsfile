@@ -25,41 +25,41 @@ pipeline {
         }
       }
     }
-    // stage('OWASP Dependency-Check Vulnerabilities') {
-    //   steps {
-    //     script {
-    //       dependencycheck.owaspdependency()
-    //     }
-    //   }
-    // }
-    // stage('UNIT TEST') {
-    //   steps {
-    //     script {
-    //       maven.unittest()
-    //     }
-    //   }
-    // }
+    stage('OWASP Dependency-Check Vulnerabilities') {
+      steps {
+        script {
+          dependencycheck.owaspdependency()
+        }
+      }
+    }
+    stage('UNIT TEST') {
+      steps {
+        script {
+          maven.unittest()
+        }
+      }
+    }
 
-    // stage('INTEGRATION TEST') {
-    //   steps {
-    //     script {
-    //       maven.integrationtest()
-    //     }
-    //   }
-    // }
-    // stage('CODE ANALYSIS with SONARQUBE') {
-    //   environment {
-    //     scannerHome = tool 'sonar-scanner'
-    //   }
+    stage('INTEGRATION TEST') {
+      steps {
+        script {
+          maven.integrationtest()
+        }
+      }
+    }
+    stage('CODE ANALYSIS with SONARQUBE') {
+      environment {
+        scannerHome = tool 'sonar-scanner'
+      }
 
-    //   steps {
-    //     script {
-    //       withSonarQubeEnv('sonarqube') {
-    //         sonarqube.sonarscanner('release-java-mvp', 'release-java-mvp')
-    //       }
-    //     }
-    //   }
-    // }
+      steps {
+        script {
+          withSonarQubeEnv('sonarqube') {
+            sonarqube.sonarscanner('release-java-mvp', 'release-java-mvp')
+          }
+        }
+      }
+    }
     stage("Publish to Nexus Repository Manager") {
       steps {
         script {
@@ -70,14 +70,14 @@ pipeline {
         }
       }
     }
-    // stage('DOCKER BUILD & PUSH') {
-    //   steps {
-    //     script {
+    stage('DOCKER BUILD & PUSH') {
+      steps {
+        script {
 
-    //       dockertask.dockertask(env.IMAGE_NAME, env.BUILD_ID, env.DOCKER_CREDENTIALS_ID)
-    //     }
-    //   }
-    // }
+          dockertask.dockertask(env.IMAGE_NAME, env.BUILD_ID, env.DOCKER_CREDENTIALS_ID)
+        }
+      }
+    }
 
   }
 }
