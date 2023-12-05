@@ -1,8 +1,5 @@
 @Library('shared-library') _
 pipeline {
-  triggers {
-    githubPush()
-  }
   agent any
   environment {
     IMAGE_NAME = 'pratyusha2001/mvpjava-release'
