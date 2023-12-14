@@ -10,27 +10,27 @@ pipeline {
     }
     parameters {
         string(name: 'VERSION', defaultValue: '1.0-23', description: 'Enter the version along with build id')
-        choice(name: 'ENVIRONMENT', choices: ['QA', 'Pre-Prod', 'Prod'], description: 'Select deployment environment')
+        // choice(name: 'ENVIRONMENT', choices: ['QA', 'Pre-Prod', 'Prod'], description: 'Select deployment environment')
 
     }
 
     stages {
-        stage('set environment'){    
-              steps {
-                script {
-                     if (params.ENVIRONMENT == "QA") {
-                        SSHCONFIGNAME = 'QACRED'
-                    } else if (params.ENVIRONMENT == "Pre-Prod") {
-                        SSHCONFIGNAME = 'PREPRODCRED'
-                    } else {
-                        SSHCONFIGNAME = 'PRODCRED'
-                    }
-                    echo "SSH Configuration Name: ${SSHCONFIGNAME}"
+        // stage('set environment'){    
+        //       steps {
+        //         script {
+        //              if (params.ENVIRONMENT == "QA") {
+        //                 SSHCONFIGNAME = 'QACRED'
+        //             } else if (params.ENVIRONMENT == "Pre-Prod") {
+        //                 SSHCONFIGNAME = 'PREPRODCRED'
+        //             } else {
+        //                 SSHCONFIGNAME = 'PRODCRED'
+        //             }
+        //             echo "SSH Configuration Name: ${SSHCONFIGNAME}"
  
  
-        }
-              }
-        }    
+        // }
+        //       }
+        // }    
         stage('Download artifact from Nexus') {
             steps {
                 script {
