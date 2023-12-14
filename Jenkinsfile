@@ -37,6 +37,7 @@ pipeline {
                          string(credentialsId: 'nexuspassword', variable: 'NEXUS_PASSWORD'),
                      ])
                      {
+                         echo '${params.buildID}'
                         downloadnexusartifact.download(OUTPUTFILENAME,NEXUS_USERNAME,NEXUS_PASSWORD,NEXUS_URL,env.GROUP_ID,params.buildID,ARTIFACT_NAME)
                 
                      }
