@@ -8,11 +8,7 @@ pipeline {
          ARTIFACT_NAME='vprofile'
 
     }
-    parameters {
-        string(name: 'VERSION', defaultValue: '1.0-23', description: 'Enter the version along with build id')
-        // choice(name: 'ENVIRONMENT', choices: ['QA', 'Pre-Prod', 'Prod'], description: 'Select deployment environment')
 
-    }
 
     stages {
         // stage('set environment'){    
@@ -36,12 +32,12 @@ pipeline {
                 script {
                 
                      withCredentials([
-                         string(credentialsId: 'nexusdownloadurl', variable: 'NEXUS_URL'),
+                         string(credentialsId: 'developdownloadurl', variable: 'NEXUS_URL'),
                          string(credentialsId: 'nexususername', variable: 'NEXUS_USERNAME'),
                          string(credentialsId: 'nexuspassword', variable: 'NEXUS_PASSWORD'),
                      ])
                      {
-                        downloadnexusartifact.download(OUTPUTFILENAME,NEXUS_USERNAME,NEXUS_PASSWORD,NEXUS_URL,env.GROUP_ID,params.VERSION,ARTIFACT_NAME)
+                        downloadnexusartifact.download(OUTPUTFILENAME,NEXUS_USERNAME,NEXUS_PASSWORD,NEXUS_URL,env.GROUP_ID,buildID,ARTIFACT_NAME)
                 
                      }
              }
