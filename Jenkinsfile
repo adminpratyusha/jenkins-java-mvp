@@ -67,7 +67,7 @@ pipeline {
       steps {
         script {
           withCredentials([string(credentialsId: 'nexusurl', variable: 'NEXUS_URL')]) {
-            nexusrepo.nexus(NEXUS_URL,env.BUILD_ID)
+            ARTIFACT_VERSION=nexusrepo.nexus(NEXUS_URL,env.BUILD_ID)
 
           }
         }
@@ -86,7 +86,7 @@ pipeline {
                 script {
                     // Trigger the downstream pipeline (Pipeline B) only if the build is stable or successful
                     if (currentBuild.resultIsBetterOrEqualTo('SUCCESS')) {
-                        build job: 'AutoDeployToDev', parameters: [string(name: 'buildID', value: ARTVERSION)]
+                        build job: 'AutoDeployToDev', parameters: [string(name: 'buildID', value: ARTIFACT_VERSION)]
                     } else {
                         echo 'Skipping downstream pipeline due to unsuccessful upstream build.'
                     }
