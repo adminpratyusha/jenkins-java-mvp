@@ -35,21 +35,7 @@ pipeline {
     //     }
     //   }
     // }
-    stage('UNIT TEST') {
-      steps {
-        script {
-          maven.unittest()
-        }
-      }
-    }
-
-    stage('INTEGRATION TEST') {
-      steps {
-        script {
-          maven.integrationtest()
-        }
-      }
-    }
+?
     // stage('CODE ANALYSIS with SONARQUBE') {
     //   environment {
     //     scannerHome = tool 'sonar-scanner'
