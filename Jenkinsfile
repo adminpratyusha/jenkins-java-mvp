@@ -22,7 +22,7 @@ pipeline {
         //                 SSHCONFIGNAME = 'PRODCRED'
         //             }
         //             echo "SSH Configuration Name: ${SSHCONFIGNAME}"
- 
+
  
         // }
         //       }
