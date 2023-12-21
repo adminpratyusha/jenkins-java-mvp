@@ -28,26 +28,26 @@ pipeline {
         }
       }
     }
-    // stage('OWASP Dependency-Check Vulnerabilities') {
-    //   steps {
-    //     script {
-    //       dependencycheck.owaspdependency()
-    //     }
-    //   }
-    // }
-    // stage('CODE ANALYSIS with SONARQUBE') {
-    //   environment {
-    //     scannerHome = tool 'sonar-scanner'
-    //   }
+    stage('OWASP Dependency-Check Vulnerabilities') {
+      steps {
+        script {
+          dependencycheck.owaspdependency()
+        }
+      }
+    }
+    stage('CODE ANALYSIS with SONARQUBE') {
+      environment {
+        scannerHome = tool 'sonar-scanner'
+      }
 
-    //   steps {
-    //     script {
-    //       withSonarQubeEnv('sonarqube') {
-    //         sonarqube.sonarscanner('Java', 'java')
-    //       }
-    //     }
-    //   }
-    // }
+      steps {
+        script {
+          withSonarQubeEnv('sonarqube') {
+            sonarqube.sonarscanner('Java', 'java')
+          }
+        }
+      }
+    }
     stage("Publish to Nexus Repository Manager") {
       steps {
         script {
