@@ -2,7 +2,7 @@
 pipeline {
     agent any
     environment {
-        SSHCONFIGNAME='sshtest'
+        // SSHCONFIGNAME='sshtest'
         GROUP_ID = 'com/visualpathit/vprofile'
          OUTPUTFILENAME = 'vprofile.war'
          ARTIFACT_NAME='vprofile'
