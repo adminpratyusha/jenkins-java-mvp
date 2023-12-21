@@ -6,6 +6,7 @@ pipeline {
   agent any
   environment {
     IMAGE_NAME = 'pratyusha2001/mvpjava-release'
+    
     NEXUS_VERSION = "nexus3"
     NEXUS_PROTOCOL = "http"
     NEXUS_REPOSITORY = "mvp-java-release"
