@@ -42,7 +42,6 @@ pipeline {
         }
       }
     }
-
     stage('INTEGRATION TEST') {
       steps {
         script {
